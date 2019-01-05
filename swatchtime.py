@@ -14,7 +14,8 @@ class SwatchTime:
     @staticmethod
     def get_beat(now: datetime.datetime = datetime.datetime.utcnow() + datetime.timedelta(hours = 1)) -> int:
         """
-        Returns the current time as an integer representing the numbers of .beats into the day.
+        Returns the current time as an integer representing the numbers
+        of .beats into the day.
         :param now: A datetime object of some time.
         :rtype: int
         :return: int The .beat of the current moments in `now`'s day.
@@ -64,7 +65,7 @@ class PrintCycle:
 
     def print_alt_format(self):
         """
-        Prints a standard date/time code based on the utc argument. Else use local time.
+        Decides if standard time should be UTC or local.
         """
         if not self.args.utc:
             now = datetime.datetime.now()
@@ -75,8 +76,9 @@ class PrintCycle:
 
     def handler_toggle_format(self, signum: int, frame: types.FrameType):
         """
-        Only toggle if alt_format is set. If it is set, one-shot the print function to ensure the user doesn't wait a
-        second for the printout to update.
+        Only toggle if alt_format is set. If it is set, one-shot the print
+        function to ensure the user doesn't wait a second for the printout
+        to update.
         """
         if self.args.alt_format is not None:
             self.use_swatch = not self.use_swatch
@@ -99,31 +101,36 @@ def get_args(argv: List[str] = None) -> argparse.Namespace:
     # ArgumentDefaultsHelpFormatter can show the defaults for us
     parser = argparse.ArgumentParser(
         description='Give date and time as Swatch Internet Time.',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument('-v', '--verbose',
-                        help='Shows the PID for a few seconds before starting. Default: False',
+                        help='Shows the PID for a few seconds before starting.',
                         action='store_true')
     parser.add_argument('-t', '--tail',
-                        help='Enables tail output mode. Default: False',
+                        help='Enables tail output mode.',
                         action='store_true')
     parser.add_argument('-d', '--delay',
-                        help='Set the delay between refreshes in tail mode; only applies if tail mode is set.',
+                        help='Set the delay between refreshes in tail mode; '
+                             'only applies if tail mode is set.',
                         type=float,
                         default=1.0)
     # TODO fix line wrapping in format
     parser.add_argument('-f', '--format',
-                        help='A strftime compliant string to format the date portion of the Swatch time. '
-                             '{Beat} displays the number of beats with left-padding zeros. '
-                             '{beat} displays the number of beats without padding zeros. ',
+                        help='A strftime compliant string to format the date '
+                             'portion of the Swatch time. {Beat} displays '
+                             'the number of beats with left-padding zeros. '
+                             '{beat} displays the number of beats without '
+                             'padding zeros.',
                         type=str,
                         default='d%d.%m.%y@{Beat}'
                         )
     parser.add_argument('--alt-format',
-                        help='Format to switch to after receiving a USR1 signal; only applies if tail output is set. '
-                             'Default: None',
+                        help='Format to switch to after receiving a USR1 '
+                             'signal; only applies if tail output is set. ',
                         type=str)
     parser.add_argument('-u', '--utc', '--universal',
-                        help='Display standard time as UTC (Coordinated Universal Time). Default: False.',
+                        help='Display standard time as UTC '
+                             '(Coordinated Universal Time).',
                         action='store_true')
     return parser.parse_args(argv)
 
@@ -138,7 +145,8 @@ def main():
 
     time_cycle = PrintCycle(args)
 
-    # Set USR* signals on Unix based systems and SIGINT as an alternative on Windows based systems
+    # Set USR* signals on Unix based systems and SIGINT as an alternative on
+    # Windows based systems
     if os.name == 'nt':
         signal.signal(signal.SIGINT, time_cycle.handler_toggle_format)
     else:

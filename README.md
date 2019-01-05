@@ -31,7 +31,7 @@ A `PKGBUILD` file will be included or (submitted to the AUR) in the future to st
 * `{Beat}` will format the number of beats with left-padding zeros.
   * Example `swatchtime --format d%d.%m.%y@{beat}` will output `d19.5.19@1`
 * `{beat}` will format the number of beats without padding zeros.
-  * Example `%G-%m-%d@{Beat}` will output `2019-05-19@001`
+  * Example `swatchtime --format %Y-%m-%d@{Beat}` will output `2019-05-19@001`
 
 `--alt-format` Format to switch to after receiving a USR1 signal; only applies if tail output is set. (default: None). Unlike the format argument, this must be a strictly [strftime](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior) compliant string. Examples:
 
