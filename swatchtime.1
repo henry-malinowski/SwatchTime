@@ -3,14 +3,22 @@
 swatchtime \- displays Swatch Internet Time in a formatted manner
 
 .SH SYNOPSIS
-.B swatchtime
+.B swatchtime 
+.RB [\-htuv] 
+.RB [\-d 
+.IR DELAY]
+.RB [\-f 
+.IR FORMAT]
+.RB [\-alt\-format
+.IB ALT_FORMAT]
 
 .SH DESCRIPTION
 SwatchTime is a Python program for displaying the current date and time using
 Swatch Internet Time. It provides a set of flags that are useful for a caller
 from the CLI or as part of a module for another program; like a Polybar
 module. Currently the flags are mostly stable, but may be changed in the
-future to be more like date.
+future to be more like 
+.BR date(1).
 
 .SH OPTIONS
 .TP
@@ -21,8 +29,87 @@ Display help text and exit
 .BR \-v ", "\-\-verbose
 Shows the PID for a few seconds before starting. (default: False)
 
+.TP
+.BR \-d ", "\-\-delay =\fISECONDS\fR
+The delay between refreshes in tail mode; only applies if tail mode is set.
+(default: 1 second)
+
+.TP
+.BR \-f ", "\-\-format =\fIFORMAT\fR
+
+A mostly 
+.BR strftime(3)
+compliant string to format the Swatch Time. A notable addition is a way to 
+denote how and where to format the current .beat. (default: d%d.%m.%y@{Beat})
+
+.BR "* {Beat}"
+will format the number of beats with left-padding zeros.
+
+Example:
+.BR "swatchtime \-\-format d%d.%m.%y@{beat}"
+will output
+.BR d17.5.19@1
+
+.BR "* {beat}"
+will format the number of bears without padding zeros.
+
+Example:
+.BR "swatchtime \-\-format %Y-%m-%d@{Beat}"
+will output
+.BR 2019-05-17@001
+
+.TP
+.BR \-\-alt\-format =\fIFORMAT\fR
+Format to switch to after receiving a USR1 signal; only applies if tail
+output is set. Unlike the format argument, this must be a strictly 
+.BR strftime(3)
+compliant string.
+
+Example:
+.BR "swatchtime \-t \-alt\-format %c" 
+will output
+.BR "Thu Jan  4 05:45:16 2019"
+(similar to date)
+
+Example:
+.BR "swatchtime \-t \-alt\-format %Y-%m-%dT%H:%M:%S"
+will output
+.BR "2019-01-04T04:45:19"
+(an ISO-8601 string for local time)
+
+.TP
+.BR \-u ", "\-\-utc ", "\-\-universal
+Displays standard time as UTC (Coordinated Universal Time). (default: False)
+
+Example:
+.BR "swatchtime \-t \-u \-\-alt\-format %Y-%m-%dT%H:%M:%SZ"
+will output
+.BR "2019-01-04T04:45:45Z"
+(an ISO-8601 string for Zulu Time).
+
+.TP Note:
+Both format options may be called using 'single-quotes', "double-quotes", or no quotes. Quotation 
+marks are only needed if the formatting string contains a space.
+
+.SH SIGNALS
+.BR USR1
+Toggles between Swatch Time formatting and whatever format was specified by 
+\-\-alt\-format at runtime.
+
+.BR USR2
+Displays the current PID and waits 4 seconds. This is a debug oriented 
+feature that may be removed or replaced in a future update.
+
+
 .SH AUTHOR
 Henry Malinowski <malinowski.henry+swatchtime@gmail.com>
+
+.SH LICENSE
+See the LICENSE file for the terms of redistribution.
+
+.SH SEE ALSO
+.BR date(1), 
+.BR strftime(3)
 
 .SH REPORTING BUGS
 Report issues on GitHub <https://github.com/henry-malinowski/SwatchTime>
