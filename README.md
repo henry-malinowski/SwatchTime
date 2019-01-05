@@ -2,7 +2,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/dd0f9388c802c7c8cea2/maintainability)](https://codeclimate.com/github/henry-malinowski/SwatchTime/maintainability)
 
-Swatch time is a Python program for displaying the current date and time using [Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time). It provides a set of flags that are useful for a caller from the CLI or as part of a module for another program; like a [Polybar](https://github.com/jaagr/polybar) [module](https://github.com/jaagr/polybar/wiki/User-contributed-modules).  Currently the flags are mostly stable, but may be changed in the future to be more like [`date`](https://linux.die.net/man/1/date).
+SwatchTime is a Python program for displaying the current date and time using [Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time). It provides a set of flags that are useful for a caller from the CLI or as part of a module for another program; like a [Polybar](https://github.com/jaagr/polybar) [module](https://github.com/jaagr/polybar/wiki/User-contributed-modules).  Currently the flags are mostly stable, but may be changed in the future to be more like [`date`](https://linux.die.net/man/1/date).
 
 ## Installation
 
