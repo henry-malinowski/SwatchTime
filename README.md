@@ -10,6 +10,7 @@ Copy the python script to a location that is in your path. On way might be...
 
 ```sh
 sudo install -m 0755 swatchtime.py /usr/bin/swatchtime
+sudo install -m 0644 swatchtime.1 -t /usr/share/man/
 ```
 
 ### Arch Linux
