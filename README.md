@@ -45,3 +45,9 @@ A `PKGBUILD` file will be included or (submitted to the AUR) in the future to st
 * `swatchtime -t -u --alt-format %Y-%m-%dT%H:%M:%SZ` produces `2019-01-04T04:45:19Z` (an ISO-8601 string for Zulu time).
 
 *Note: Both format options may be called using 'single-quotes', "double-quotes", or no quotes. Quotation marks are only needed if the formatting string contains a space.*
+
+## TODOs
+
+* Bash auto-completion files
+* ZSH auto-completion files
+* Fish auto-completion files
