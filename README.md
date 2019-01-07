@@ -30,7 +30,7 @@ A `PKGBUILD` file will be included or (submitted to the AUR) in the future to st
 `-f, --format` A mostly [strftime](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior) compliant string to format the Swatch Time. A notable addition is a way to denote how and where to format the current .beat. (default: `d%d.%m.%y@{Beat}`)
 
 * `{Beat}` will format the number of beats with left-padding zeros.
-  * Example `swatchtime --format d%d.%m.%y@{beat}` will output `d19.5.19@1`
+  * Example `swatchtime --format d%d.%m.%y@{beat}` will output `d19.05.19@1`
 * `{beat}` will format the number of beats without padding zeros.
   * Example `swatchtime --format %Y-%m-%d@{Beat}` will output `2019-05-19@001`
 
