@@ -10,12 +10,20 @@ Copy the python script to a location that is in your path. On way might be...
 
 ```sh
 sudo install -m 0755 swatchtime.py /usr/bin/swatchtime
-sudo install -m 0644 swatchtime.1 -t /usr/share/man/
 ```
 
 ### Arch Linux
 
-A `PKGBUILD` file will be included or (submitted to the AUR) in the future to streamline installation and updating.
+**Automatically**
+Use an AUR helper like [Yay](https://github.com/Jguer/yay), to install the [AUR package](https://aur.archlinux.org/packages/swatchtime-git/); `yay -S swatchtime-git`
+
+**Manually**
+
+```sh
+git clone https://aur.archlinux.org/swatchtime-git.git 
+cd swatchtime-git
+makepkg --install
+```
 
 ## Usage
 
