@@ -12,7 +12,8 @@ from typing import List
 class SwatchTime:
 
     @staticmethod
-    def get_beat(now: datetime = datetime.utcnow() + timedelta(hours=1)) -> int:
+    def get_beat(
+            now: datetime = datetime.utcnow() + timedelta(hours=1)) -> int:
         """
         Returns the current time as an integer representing the numbers
         of .beats into the day.
