@@ -1,6 +1,6 @@
 #!/usr/bin/env -S python3 -u
 import argparse
-import datetime
+from datetime import datetime, timedelta
 import math
 import os
 import signal
@@ -12,7 +12,7 @@ from typing import List
 class SwatchTime:
 
     @staticmethod
-    def get_beat(now: datetime.datetime = datetime.datetime.utcnow() + datetime.timedelta(hours = 1)) -> int:
+    def get_beat(now: datetime = datetime.utcnow() + timedelta(hours=1)) -> int:
         """
         Returns the current time as an integer representing the numbers
         of .beats into the day.
@@ -27,13 +27,13 @@ class SwatchTime:
         ) % 1000
 
     @staticmethod
-    def print_swatch(now: datetime.datetime, time_format: str):
+    def print_swatch(now: datetime, time_format: str):
         """
         Prints the swatch time as specified in time_format
         :param now: The current time at UT1
         :param time_format: The time format string.
         """
-        now += datetime.timedelta(hours=1)
+        now += timedelta(hours=1)
         beat = SwatchTime.get_beat(now)
         time_format = time_format.replace('{Beat}', '{0:03d}'.format(beat))
         time_format = time_format.replace('{beat}', str(beat))
@@ -59,7 +59,8 @@ class PrintCycle:
         Prints a date/time code based on the state of self.use_swatch
         """
         if self.use_swatch:
-            SwatchTime.print_swatch(datetime.datetime.utcnow(), self.args.format)
+            SwatchTime.print_swatch(
+                datetime.utcnow(), self.args.format)
         else:
             PrintCycle.print_alt_format(self)
 
@@ -68,9 +69,9 @@ class PrintCycle:
         Decides if standard time should be UTC or local.
         """
         if not self.args.utc:
-            now = datetime.datetime.now()
+            now = datetime.now()
         else:
-            now = datetime.datetime.utcnow()
+            now = datetime.utcnow()
 
         print(now.strftime(self.args.alt_format))
 
@@ -98,13 +99,12 @@ def handler_exit(signum: int, frame: types.FrameType):
 
 
 def get_args(argv: List[str] = None) -> argparse.Namespace:
-    # ArgumentDefaultsHelpFormatter can show the defaults for us
     parser = argparse.ArgumentParser(
         description='Give date and time as Swatch Internet Time.',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument('-v', '--verbose',
-                        help='Shows the PID for a few seconds before starting.',
+                        help='Shows the PID for a briefly before starting.',
                         action='store_true')
     parser.add_argument('-t', '--tail',
                         help='Enables tail output mode.',
@@ -114,7 +114,6 @@ def get_args(argv: List[str] = None) -> argparse.Namespace:
                              'only applies if tail mode is set.',
                         type=float,
                         default=1.0)
-    # TODO fix line wrapping in format
     parser.add_argument('-f', '--format',
                         help='A strftime compliant string to format the date '
                              'portion of the Swatch time. {Beat} displays '
@@ -140,7 +139,7 @@ def main():
 
     # this is for one-shotting the program to get Swatch Internet time
     if args.tail is False:
-        SwatchTime.print_swatch(datetime.datetime.utcnow(), args.format)
+        SwatchTime.print_swatch(datetime.utcnow(), args.format)
         exit(0)
 
     time_cycle = PrintCycle(args)
