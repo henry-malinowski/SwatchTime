@@ -6,7 +6,7 @@ SwatchTime is a Python program for displaying the current date and time using [S
 
 ## Installation
 
-Copy the python script to a location that is in your path. On way might be...
+Copy the python script to a location that is in your path. One way might be...
 
 ```sh
 sudo install -m 0755 swatchtime.py /usr/bin/swatchtime
@@ -56,6 +56,9 @@ makepkg --install
 
 ## TODOs
 
+* Another way to communicate with a running instance of swatchtime; probably using a FIFO started using a flag
+* i3bar/Waybar module
 * Bash auto-completion files
 * ZSH auto-completion files
 * Fish auto-completion files
+* Make a proper Python package, (whatever that means)
