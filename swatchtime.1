@@ -43,7 +43,7 @@ compliant string to format the Swatch Time. A notable addition is a way to
 denote how and where to format the current .beat. (default: d%d.%m.%y@{Beat})
 
 .BR "* {Beat}"
-will format the number of beats with left-padding zeros.
+will format the number of beats without left-padding zeros.
 
 Example:
 .BR "swatchtime \-\-format d%d.%m.%y@{beat}"
@@ -51,7 +51,7 @@ will output
 .BR d17.5.19@1
 
 .BR "* {beat}"
-will format the number of bears without padding zeros.
+will format the number of beats with padding zeros.
 
 Example:
 .BR "swatchtime \-\-format %Y-%m-%d@{Beat}"

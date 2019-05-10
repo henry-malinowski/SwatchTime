@@ -38,9 +38,9 @@ makepkg --install
 
 `-f, --format` A mostly [strftime](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior) compliant string to format the Swatch Time. A notable addition is a way to denote how and where to format the current .beat. (default: `d%d.%m.%y@{Beat}`)
 
-* `{Beat}` will format the number of beats with left-padding zeros.
+* `{Beat}` will format the number of beats without left-padding zeros.
   * Example `swatchtime --format d%d.%m.%y@{beat}` will output `d19.05.19@1`
-* `{beat}` will format the number of beats without padding zeros.
+* `{beat}` will format the number of beats with padding zeros.
   * Example `swatchtime --format %Y-%m-%d@{Beat}` will output `2019-05-19@001`
 
 `--alt-format` Format to switch to after receiving a USR1 signal; only applies if tail output is set. (default: None). Unlike the format argument, this must be a strictly [strftime](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior) compliant string. Examples:
